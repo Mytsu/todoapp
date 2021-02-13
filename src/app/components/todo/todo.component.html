@@ -1,5 +1,11 @@
-<div class="todo">
-  <input type="checkbox" name="done" class="checkbox">
-  <span class="content">{{ content }}</span>
-  <button class="delete"></button>
-</div>
+<ng-container *ngIf="todo">
+  <div class="todo">
+    <span class="content">{{ todo.content }}</span>
+    <input
+      class="checkbox"
+      type="checkbox"
+      (click)="update()"
+      [checked]="todo.done">
+    <button class="delete" (click)="remove()">x</button>
+  </div>
+</ng-container>

@@ -1,0 +1,24 @@
+.todo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 10px;
+  width: calc(100% - 20px);
+  max-width: 500px;
+}
+
+.content {
+  grid-column: 1 / -1;
+  margin: 10px;
+  width: 100%;
+  display: block;
+}
+
+.checkbox {
+  justify-self: start;
+}
+
+.delete {
+  justify-self: end;
+  text-transform: uppercase;
+  padding: 5px 10px 5px 10px;
+}
