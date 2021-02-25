@@ -10,6 +10,8 @@ import { TodoComponent } from './components/todo/todo.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { environment } from './../environments/environment';
+import { NewComponent } from './components/new/new.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { environment } from './../environments/environment';
     PageListComponent,
     TodoComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NewComponent,
+    ReversePipe
   ],
   imports: [
     AppRoutingModule,
