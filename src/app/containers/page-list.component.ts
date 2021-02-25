@@ -3,14 +3,15 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Todo } from '../models/todo.model';
-import { remove, update } from '../store/actions/todo.actions';
+import { add, remove, update } from '../store/actions/todo.actions';
 
 @Component({
   selector: 'app-pagelist',
   template: `
+    <app-new (newTodoEvent)="add($event)"></app-new>
     <ng-container *ngIf="(todos$ | async) as todos">
       <app-todo
-        *ngFor="let todo of todos"
+        *ngFor="let todo of todos | reverse"
         [todo]="todo"
         (toggleUpdateEvent)="toggle($event)"
         (removeEvent)="remove($event)">
@@ -26,10 +27,14 @@ export class PageListComponent {
     this.todos$ = this.store.select('todos').pipe(tap(console.log));
   }
 
-  toggle(updatedTodo: Todo): void {
+  add(newTodo: Todo): void {
+    this.store.dispatch(add({ todo: newTodo }));
+  }
+
+  toggle(todo: Todo): void {
     const newTodo: Todo = {
-      ...updatedTodo,
-      done: !updatedTodo.done
+      ...todo,
+      done: !todo.done
     };
     this.store.dispatch(
       update({ todo: newTodo })
