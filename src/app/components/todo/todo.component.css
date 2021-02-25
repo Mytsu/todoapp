@@ -1,13 +1,15 @@
 .todo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   margin: 10px;
   width: calc(100% - 20px);
   max-width: 500px;
+  max-height: 180px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  padding: 0 0 0 1em;
 }
 
 .content {
-  grid-column: 1 / -1;
   margin: 10px;
   width: 100%;
   display: block;
@@ -15,6 +17,7 @@
 
 .checkbox {
   justify-self: start;
+  border: none;
 }
 
 .delete {
