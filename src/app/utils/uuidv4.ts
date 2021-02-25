@@ -1,5 +1,5 @@
 // https://stackoverflow.com/a/2117523/10136880
-// tslint:disable: no-bitwise
+/* eslint-disable no-bitwise */
 export const uuidv4 = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;
