@@ -1,11 +1,11 @@
 .newTodoInput {
   margin: 10px 10px;
   width: 100%;
-  max-width: calc(513px - 1em);
+  min-width: 250px;
+  max-width: calc(525px - 1em);
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-style: ridge;
   border-radius: 5px;
   height: 39px;
-  padding-left: 1em;
   font-size: 1.3em;
 }

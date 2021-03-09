@@ -8,17 +8,28 @@ import { add, remove, update } from '../store/actions/todo.actions';
 @Component({
   selector: 'app-pagelist',
   template: `
-    <app-new (newTodoEvent)="add($event)"></app-new>
-    <ng-container *ngIf="(todos$ | async) as todos">
-      <app-todo
-        *ngFor="let todo of todos | reverse"
-        [todo]="todo"
-        (toggleUpdateEvent)="toggle($event)"
-        (removeEvent)="remove($event)">
-      </app-todo>
-    </ng-container>
+    <div class="list">
+      <app-new (newTodoEvent)="add($event)"></app-new>
+      <ng-container *ngIf="todos$ | async as todos">
+        <app-todo
+          *ngFor="let todo of todos | reverse"
+          [todo]="todo"
+          (toggleUpdateEvent)="toggle($event)"
+          (removeEvent)="remove($event)"
+        >
+        </app-todo>
+      </ng-container>
+    </div>
   `,
-  styles: [``],
+  styles: [
+    `
+      .list {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+      }
+    `,
+  ],
 })
 export class PageListComponent {
   todos$!: Observable<Todo[]>;
@@ -34,11 +45,9 @@ export class PageListComponent {
   toggle(todo: Todo): void {
     const newTodo: Todo = {
       ...todo,
-      done: !todo.done
+      done: !todo.done,
     };
-    this.store.dispatch(
-      update({ todo: newTodo })
-    );
+    this.store.dispatch(update({ todo: newTodo }));
   }
 
   remove(todoId: string): void {
