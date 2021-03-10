@@ -8,7 +8,7 @@ import { add, remove, update } from '../store/actions/todo.actions';
 @Component({
   selector: 'app-pagelist',
   template: `
-    <div class="list">
+    <div fxLayout="column" fxLayoutAlign="center center">
       <app-new (newTodoEvent)="add($event)"></app-new>
       <ng-container *ngIf="todos$ | async as todos">
         <app-todo
@@ -21,15 +21,7 @@ import { add, remove, update } from '../store/actions/todo.actions';
       </ng-container>
     </div>
   `,
-  styles: [
-    `
-      .list {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-      }
-    `,
-  ],
+  styles: [``],
 })
 export class PageListComponent {
   todos$!: Observable<Todo[]>;

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './store/reducers/todo.reducer';
@@ -24,6 +25,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
     ReversePipe
   ],
   imports: [
+    FlexLayoutModule,
     AppRoutingModule,
     BrowserModule,
     StoreModule.forRoot({ todos: reducer }),
