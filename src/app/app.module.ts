@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './store/reducers/todo.reducer';
@@ -27,6 +29,7 @@ import { environment } from './../environments/environment';
     NavbarComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     FlexLayoutModule,
     AppRoutingModule,
     BrowserModule,
@@ -35,6 +38,7 @@ import { environment } from './../environments/environment';
       maxAge: 25,
       logOnly: environment.production
     }),
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
