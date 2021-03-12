@@ -10,20 +10,20 @@ import { PageListComponent } from './containers/page-list.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { environment } from './../environments/environment';
 import { NewComponent } from './components/new/new.component';
-import { ReversePipe } from './pipes/reverse.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ReversePipe } from './pipes/reverse.pipe';
+import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
+    ReversePipe,
     AppComponent,
     PageListComponent,
     TodoComponent,
     LoginComponent,
     NotFoundComponent,
     NewComponent,
-    ReversePipe,
     NavbarComponent
   ],
   imports: [
