@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todoapp-31823": {
+      "hosting": {
+        "todoapp": [
+          "todoapp-31823"
+        ]
+      }
+    }
+  }
+}

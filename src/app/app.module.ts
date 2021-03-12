@@ -13,6 +13,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { environment } from './../environments/environment';
 import { NewComponent } from './components/new/new.component';
 import { ReversePipe } from './pipes/reverse.pipe';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
     LoginComponent,
     NotFoundComponent,
     NewComponent,
-    ReversePipe
+    ReversePipe,
+    NavbarComponent
   ],
   imports: [
     FlexLayoutModule,
