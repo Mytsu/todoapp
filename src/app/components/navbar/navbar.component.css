@@ -3,3 +3,7 @@
   height: 50px;
   display: inline-block;
 }
+
+.navbar {
+  list-style-type: none;
+}
