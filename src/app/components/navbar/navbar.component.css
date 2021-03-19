@@ -1,9 +1,34 @@
-:host {
-  width: 100%;
-  height: 50px;
-  display: inline-block;
+@media (max-width: 599px) {
+  .navbar {
+    height: calc(100% - 56px);
+  }
 }
 
 .navbar {
-  list-style-type: none;
+  height: calc(100% - 64px);
+}
+
+mat-sidenav-content {
+  height: 100%;
+}
+
+mat-icon-button {
+  padding-left: 0.01em;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.logo {
+  margin-left: 1em;
+}
+
+.spacer {
+  width: 100%;
+}
+
+.sidenav-item {
+  text-align: left;
+  padding-left: 1em;
 }

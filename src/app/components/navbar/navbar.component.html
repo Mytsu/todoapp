@@ -1,7 +1,30 @@
-<mat-toolbar color="primary">
-  <span>Responsive Navigation</span>
-  <span class="example-spacer"></span>
-  <a href="#" mat-button>Menu Item 1</a> <a href="#" mat-button>Menu Item 2</a>
-  <a href="#" mat-button>Menu Item 3</a> <a href="#" mat-button>Menu Item 4</a>
-  <a href="#" mat-button>Menu Item 5</a> <a href="#" mat-button>Menu Item 6</a>
-</mat-toolbar>
+<div class="navbar">
+  <mat-toolbar color="primary">
+    <button mat-icon-button fxShow="true" fxHide.gt-sm="true">
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <span class="logo">Logo</span>
+    <span class="spacer"></span>
+    <nav fxShow="true" fxHide.lt-md="true">
+      <a href="#" mat-button>Item 1</a>
+      <a href="#" mat-button>Item 2</a>
+      <a href="#" mat-button>Item 3</a>
+    </nav>
+    <ng-container *ngIf="(user$ | async) as user">
+      <!-- TODO: User settings menu -->
+      <span *ngIf="user.uid !== ''">{{ user.displayName }} is logged in</span>
+    </ng-container>
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <nav fxLayout="column">
+        <a class="sidenav-item" href="#" mat-button>Item 1</a>
+        <a class="sidenav-item" href="#" mat-button>Item 2</a>
+        <a class="sidenav-item" href="#" mat-button>Item 3</a>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

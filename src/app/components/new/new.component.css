@@ -1,7 +1,7 @@
 .newTodoInput {
   margin: 10px 10px;
   width: 100%;
-  min-width: 300px;
+  min-width: 230px;
   max-width: 500px;
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0.15);

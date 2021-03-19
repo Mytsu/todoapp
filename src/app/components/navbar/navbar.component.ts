@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AuthState } from '../../models/auth.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  user$!: Observable<User>;
 
-  ngOnInit(): void {
+  constructor(private store: Store<{ auth: AuthState }>) {
+    this.user$ = this.store.select(state => (state.auth.user));
   }
+
+  ngOnInit(): void { }
 
 }

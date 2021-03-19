@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
+    <app-navbar>
+      <router-outlet></router-outlet>
+    </app-navbar>
   `,
-  styles: [``]
+  styles: [``],
 })
 export class AppComponent {
   title = 'todoapp';
