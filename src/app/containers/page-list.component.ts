@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { Todo } from '../models/todo.model';
 import { add, remove, update } from '../store/actions/todo.actions';
 
@@ -27,7 +26,7 @@ export class PageListComponent {
   todos$!: Observable<Todo[]>;
 
   constructor(private store: Store<{ todos: Todo[] }>) {
-    this.todos$ = this.store.select('todos').pipe(tap(console.log));
+    this.todos$ = this.store.select('todos');
   }
 
   add(newTodo: Todo): void {
