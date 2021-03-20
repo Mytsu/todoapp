@@ -32,3 +32,8 @@ mat-sidenav {
   text-align: left;
   padding-left: 1em;
 }
+
+a, a:visited {
+  color: inherit;
+  text-decoration: none;
+}

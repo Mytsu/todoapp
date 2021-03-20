@@ -1,27 +1,32 @@
-<div class="navbar">
+<div class="navbar" *ngIf="(user$ | async) as user">
   <mat-toolbar color="primary">
     <button mat-icon-button fxShow="true" fxHide.gt-sm="true">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <span class="logo">Logo</span>
+    <span class="logo"><a [routerLink]="[ '/' ]">Logo</a></span>
     <span class="spacer"></span>
-    <nav fxShow="true" fxHide.lt-md="true">
-      <a href="#" mat-button>Item 1</a>
-      <a href="#" mat-button>Item 2</a>
-      <a href="#" mat-button>Item 3</a>
-    </nav>
-    <ng-container *ngIf="(user$ | async) as user">
-      <!-- TODO: User settings menu -->
-      <span *ngIf="user.uid !== ''">{{ user.displayName }} is logged in</span>
+    <ng-container *ngIf="user.uid !== ''; else navloginTemplate">
+      <nav fxShow="true" fxHide.lt-md="true">
+        <a href="#" mat-button>Item 1</a>
+        <a href="#" mat-button>Item 2</a>
+        <a href="#" mat-button>Item 3</a>
+      </nav>
     </ng-container>
+    <ng-template #navloginTemplate>
+      <nav>
+        <a href="#" mat-button>Login</a>
+      </nav>
+    </ng-template>
   </mat-toolbar>
   <mat-sidenav-container fxFlexFill>
     <mat-sidenav #sidenav>
-      <nav fxLayout="column">
-        <a class="sidenav-item" href="#" mat-button>Item 1</a>
-        <a class="sidenav-item" href="#" mat-button>Item 2</a>
-        <a class="sidenav-item" href="#" mat-button>Item 3</a>
-      </nav>
+      <ng-container *ngIf="user.uid !== ''">
+        <nav fxLayout="column">
+          <a href="#" mat-button>Item 1</a>
+          <a href="#" mat-button>Item 2</a>
+          <a href="#" mat-button>Item 3</a>
+        </nav>
+      </ng-container>
     </mat-sidenav>
     <mat-sidenav-content>
       <ng-content></ng-content>
