@@ -1,9 +1,14 @@
-<div class="navbar" *ngIf="(user$ | async) as user">
+<div class="navbar" *ngIf="user$ | async as user">
   <mat-toolbar color="primary">
-    <button mat-icon-button fxShow="true" fxHide.gt-sm="true">
+    <button
+      mat-icon-button
+      fxShow="true"
+      fxHide.gt-sm="true"
+      *ngIf="user.uid !== ''"
+    >
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <span class="logo"><a [routerLink]="[ '/' ]">Logo</a></span>
+    <span class="logo"><a [routerLink]="['/']">Logo</a></span>
     <span class="spacer"></span>
     <ng-container *ngIf="user.uid !== ''; else navloginTemplate">
       <nav fxShow="true" fxHide.lt-md="true">
@@ -14,7 +19,7 @@
     </ng-container>
     <ng-template #navloginTemplate>
       <nav>
-        <a href="#" mat-button>Login</a>
+        <a [routerLink]="['login']" mat-button>Login</a>
       </nav>
     </ng-template>
   </mat-toolbar>
