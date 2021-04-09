@@ -1,9 +1,15 @@
+:host {
+  width: 80%;
+  margin-top: 2rem;
+}
+
 .newTodoInput {
-  margin: 20px 10px 10px 10px;
-  width: 330px;
+  padding-left: 1rem;
+  width: 95.5%;
+  min-width: calc(230px - 1rem);
+  max-width: calc(500px - 1rem);
   height: 40px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-style: ridge;
   border-radius: 5px;
-  padding: 0 0 0 .9em;
 }
