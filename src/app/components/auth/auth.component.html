@@ -1,0 +1,36 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card>
+    <form fxLayout="column" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" name="email" [(ngModel)]="email" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+        />
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        {{ texts.formButton }}
+      </button>
+    </form>
+    <hr />
+    <a
+      (click)="(googleButtonEvent)"
+      class="btn-google"
+      href="#"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <img
+        src="../../../assets/btn_google_dark_normal.svg"
+        alt="Sign In with Google"
+      />
+      <span>{{ texts.googleButton }}</span>
+    </a>
+  </mat-card>
+</div>

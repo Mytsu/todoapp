@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageListComponent } from './containers/page-list.component';
+import { ListPageComponent } from './containers/list.page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { LoginComponent } from './components/login/login.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
-  { path: '', component: PageListComponent },
+  { path: '', component: ListPageComponent },
+  { path: 'login', component: AuthComponent },
   { path: '**', component: NotFoundComponent },
-  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

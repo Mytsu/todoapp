@@ -1,29 +1,31 @@
+import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer as todoReducer } from './store/reducers/todo.reducer';
 import { reducer as authReducer } from './store/reducers/auth.reducer';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
-import { PageListComponent } from './containers/page-list.component';
+import { ListPageComponent } from './containers/list.page.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { LoginComponent } from './components/login/login.component';
+import { AuthComponent } from './components/auth/auth.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NewComponent } from './components/new/new.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { LoginFormComponent }
-  from './components/login-form/login-form.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { environment } from './../environments/environment';
 import { AuthService } from './services/auth.service';
@@ -32,14 +34,13 @@ import { AuthService } from './services/auth.service';
   declarations: [
     ReversePipe,
     AppComponent,
-    PageListComponent,
+    ListPageComponent,
     TodoComponent,
-    LoginComponent,
+    AuthComponent,
     NotFoundComponent,
     NewComponent,
     NavbarComponent,
     SignUpComponent,
-    LoginFormComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -54,10 +55,14 @@ import { AuthService } from './services/auth.service';
       maxAge: 25,
       logOnly: true,
     }),
+    FormsModule,
+    MatFormFieldModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
+    MatInputModule,
+    MatCardModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

@@ -25,7 +25,9 @@ export class AuthService {
     this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.setUserData(result.user);
+        if (result.user) {
+          this.setUserData(result.user);
+        }
         this.router.navigate(['']);
       })
       .catch((error) => {
@@ -38,7 +40,9 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.sendVerificationEmail();
-        this.setUserData(result.user);
+        if (result.user) {
+          this.setUserData(result.user);
+        }
       })
       .catch((error) => {
         // TODO: handle signUp error
@@ -80,16 +84,16 @@ export class AuthService {
       });
   }
 
-  private setUserData(user: any): void {
+  private setUserData(user: firebase.User): void {
     if (!user) { return; }
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
     const userData: User = {
       uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
+      email: user.email || '',
+      displayName: user.displayName || '',
+      photoURL: user.photoURL || '',
       emailVerified: user.emailVerified,
     };
     userRef.set(userData, {

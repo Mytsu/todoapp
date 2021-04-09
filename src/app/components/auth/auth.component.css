@@ -1,0 +1,41 @@
+.container {
+  height: 100%;
+}
+
+mat-form-field, input[type=text], input[type=password] {
+  width: 300px;
+}
+
+.btn-google {
+  margin: 10px 0 10px 0;
+  background-color: var(--primary);
+  padding-right: 5px;
+  width: 300px;
+}
+
+.btn-google > img {
+  margin-right: 5px;
+}
+
+.btn-google > span {
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+
+a, a:active, a:hover, a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+hr {
+  margin: 20px 0 20px 0;
+  width: 300px;
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.or {
+  margin: 10px;
+  font-size: 1.1rem;
+}
