@@ -1,7 +1,10 @@
+:host {
+  width: 80%;
+  margin-top: .5rem;
+}
+
 .todo {
   display: flex;
-  margin: 10px;
-  width: 100%;
   min-width: 230px;
   max-width: 500px;
   min-height: 40px;
@@ -9,7 +12,6 @@
   overflow-y: auto;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  padding: 0 0 0 1em;
 }
 
 .content {
@@ -21,6 +23,7 @@
 .checkbox {
   justify-self: start;
   border: none;
+  margin-left: 1rem;
 }
 
 .delete {

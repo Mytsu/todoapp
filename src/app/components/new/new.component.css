@@ -1,5 +1,9 @@
+:host {
+  width: 80%;
+  margin-top: 2rem;
+}
+
 .newTodoInput {
-  margin: 10px 10px;
   width: 100%;
   min-width: 230px;
   max-width: 500px;
@@ -7,6 +11,5 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-style: ridge;
   border-radius: 5px;
-  padding: 0 0 0 .9em;
   font-size: 1.1rem;
 }
