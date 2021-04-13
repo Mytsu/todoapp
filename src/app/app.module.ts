@@ -20,6 +20,7 @@ import { reducer as authReducer } from './store/reducers/auth.reducer';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { ListPageComponent } from './containers/list.page.component';
+import { AuthPageComponent } from './containers/auth.page.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -29,12 +30,14 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { environment } from './../environments/environment';
 import { AuthService } from './services/auth.service';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
     ReversePipe,
     AppComponent,
     ListPageComponent,
+    AuthPageComponent,
     TodoComponent,
     AuthComponent,
     NotFoundComponent,
@@ -63,6 +66,7 @@ import { AuthService } from './services/auth.service';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
+    EffectsModule.forRoot([]),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

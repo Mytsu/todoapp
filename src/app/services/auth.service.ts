@@ -26,9 +26,10 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         if (result.user) {
-          this.setUserData(result.user);
+          this.router.navigate(['']);
+          return result.user;
         }
-        this.router.navigate(['']);
+        throw new Error('SignIn failed');
       })
       .catch((error) => {
         // TODO: handle sign in error

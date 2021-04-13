@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 const GET_USER = createAction(
   '[Auth] Get user',
-  props<{ payload?: any }>());
+  props<{ payload?: { email: string; password: string } }>());
 const AUTHENTICATED = createAction(
   '[Auth] Authenticated',
   props<{ payload?: any }>()

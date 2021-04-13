@@ -6,7 +6,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  @Input() type!: 'login' | 'signUp';
+  @Input() type!: string;
   @Output() googleSignInEvent = new EventEmitter<null>();
   @Output() formSubmitEvent = new EventEmitter<{
     email: string;
