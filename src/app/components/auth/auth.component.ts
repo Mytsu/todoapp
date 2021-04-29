@@ -39,7 +39,6 @@ export class AuthComponent implements OnInit {
 
   onSubmit(): void {
     const data = { email: this.email, password: this.password };
-    console.log(data);
     this.formSubmitEvent.emit(data);
   }
 }

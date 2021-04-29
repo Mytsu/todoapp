@@ -1,12 +1,15 @@
 :host {
   width: 80%;
   margin-top: .5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .todo {
   display: flex;
   min-width: 230px;
   max-width: 500px;
+  width: 100%;
   min-height: 40px;
   max-height: 180px;
   overflow-y: auto;

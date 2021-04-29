@@ -19,18 +19,17 @@
       </button>
     </form>
     <hr />
-    <a
-      (click)="(googleButtonEvent)"
+    <button
+      (click)="googleButtonEvent()"
       class="btn-google"
-      href="#"
       fxLayout="row"
       fxLayoutAlign="start center"
     >
       <img
         src="../../../assets/btn_google_dark_normal.svg"
-        alt="Sign In with Google"
+        alt="{{ texts.googleButton }}"
       />
       <span>{{ texts.googleButton }}</span>
-    </a>
+    </button>
   </mat-card>
 </div>

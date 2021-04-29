@@ -7,7 +7,7 @@ import { add, remove, update } from '../store/actions/todo.actions';
 @Component({
   selector: 'app-listpage',
   template: `
-    <div fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="column" fxLayoutAlign="center center">
       <app-new (newTodoEvent)="add($event)"></app-new>
       <ng-container *ngIf="todos$ | async as todos">
         <app-todo

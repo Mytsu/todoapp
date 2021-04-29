@@ -11,6 +11,8 @@ mat-form-field, input[type=text], input[type=password] {
   background-color: var(--primary);
   padding-right: 5px;
   width: 300px;
+  color: #fff;
+  border: none;
 }
 
 .btn-google > img {
@@ -19,8 +21,6 @@ mat-form-field, input[type=text], input[type=password] {
 
 .btn-google > span {
   width: 100%;
-  text-align: center;
-  font-weight: 500;
 }
 
 a, a:active, a:hover, a:visited {
