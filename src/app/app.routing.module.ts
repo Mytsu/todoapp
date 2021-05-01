@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListPageComponent } from './containers/list.page.component';
-import { AuthPageComponent } from './containers/auth.page.component';
+import { UserPageComponent } from './containers/user.page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: ListPageComponent },
-  { path: 'login', component: AuthPageComponent },
-  { path: 'signup', component: AuthPageComponent },
+  { path: 'login', component: UserPageComponent },
+  { path: 'signup', component: UserPageComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

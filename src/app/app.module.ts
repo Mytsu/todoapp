@@ -14,32 +14,33 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer as todoReducer } from './store/reducers/todo.reducer';
-import { reducer as authReducer } from './store/reducers/auth.reducer';
+import { reducer as userReducer } from './store/reducers/user.reducer';
+import { UserEffects } from './store/effects/user.effects';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { ListPageComponent } from './containers/list.page.component';
-import { AuthPageComponent } from './containers/auth.page.component';
+import { UserPageComponent } from './containers/user.page.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { UserComponent } from './components/auth/user.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NewComponent } from './components/new/new.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { environment } from './../environments/environment';
-import { AuthService } from './services/auth.service';
-import { EffectsModule } from '@ngrx/effects';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
     ReversePipe,
     AppComponent,
     ListPageComponent,
-    AuthPageComponent,
+    UserPageComponent,
     TodoComponent,
-    AuthComponent,
+    UserComponent,
     NotFoundComponent,
     NewComponent,
     NavbarComponent,
@@ -53,7 +54,7 @@ import { EffectsModule } from '@ngrx/effects';
     FlexLayoutModule,
     AppRoutingModule,
     BrowserModule,
-    StoreModule.forRoot({ todos: todoReducer, auth: authReducer }),
+    StoreModule.forRoot({ todos: todoReducer, user: userReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: true,
@@ -66,9 +67,9 @@ import { EffectsModule } from '@ngrx/effects';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ UserEffects ]),
   ],
-  providers: [AuthService],
+  providers: [UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
