@@ -25,7 +25,7 @@ const LOGOUT_CONFIRM = createAction(
 );
 const AUTH_ERROR = createAction(
   '[Auth] Error',
-  props<{ user: User }>()
+  props<{ error: Error }>()
 );
 
 export {

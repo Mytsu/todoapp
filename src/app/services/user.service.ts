@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import firebase from 'firebase/app';
 import { Observable, from } from 'rxjs';
 import { IUser } from '../models/user.model';
@@ -14,10 +12,8 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
   constructor(
-    private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private store: Store<{ user: IUser }>
   ) {}
 
   signIn(auth: Credential): Observable<IUser> {

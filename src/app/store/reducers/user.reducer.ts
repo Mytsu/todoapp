@@ -1,5 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { User } from '../../models/user.model';
+import { Credential } from '../../models/auth.model';
 import * as userActions from '../actions/user.actions';
 
 const defaultUser: User = new User();
@@ -23,19 +24,22 @@ const authReducer = createReducer(
   })),
   on(userActions.LOGOUT_CONFIRM, (state: User) => ({
     ...state,
-    loading: false
+    loading: false,
   })),
-  on(userActions.CRED_LOGIN, (state: User, props: any) => ({
-    ...state,
-    loading: true,
-  })),
+  on(
+    userActions.CRED_LOGIN,
+    (state: User, props: { credential: Credential }) => ({
+      ...state,
+      loading: true,
+    })
+  ),
   on(userActions.GOOGLE_LOGIN, (state: User, props: any) => ({
     ...state,
     loading: true,
   })),
-  on(userActions.AUTH_ERROR, (state: User, props: any) => ({
-    ...state,
-    error: props.error,
+  on(userActions.AUTH_ERROR, (state: User, props: { error: Error }) => ({
+    ...defaultUser,
+    error: props.error.message,
     loading: false,
   }))
 );

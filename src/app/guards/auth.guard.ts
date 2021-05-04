@@ -6,17 +6,15 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
+import { User } from './../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    ) { }
+  constructor(private store: Store<{ user: User }>, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -25,11 +23,14 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (/* this.userService.isLoggedIn **/ false) {
-      return true;
-    } else {
+    return this.store.select(userState => {
+      if (userState.user.uid !== undefined && userState.user.uid !== '') {
+        return true;
+      }
+      else {
       this.router.navigate(['/login']);
       return false;
-    }
+      }
+    });
   }
 }
