@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import { Observable, from } from 'rxjs';
-import { IUser } from '../models/user.model';
+import { User } from '../models/user.model';
 import { Credential } from '../models/auth.model';
 import { map } from 'rxjs/operators';
 
@@ -11,18 +11,15 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router,
-  ) {}
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  signIn(auth: Credential): Observable<IUser> {
+  signIn(auth: Credential): Observable<User> {
     return from(
       this.afAuth.signInWithEmailAndPassword(auth.email, auth.password)
     ).pipe(map((userCredential) => this.mapCredentials(userCredential)));
   }
 
-  signUp(auth: Credential): Observable<IUser> {
+  signUp(auth: Credential): Observable<User> {
     const cred = from(
       this.afAuth.createUserWithEmailAndPassword(auth.email, auth.password)
     );
@@ -46,7 +43,7 @@ export class UserService {
     this.afAuth.sendPasswordResetEmail(email);
   }
 
-  googleAuth(): Observable<IUser> {
+  googleAuth(): Observable<User> {
     return this.signInWithProvider(new firebase.auth.GoogleAuthProvider());
   }
 
@@ -54,21 +51,25 @@ export class UserService {
     return from(this.afAuth.signOut());
   }
 
-  private signInWithProvider(provider: any): Observable<IUser> {
-    return from (this.afAuth
-      .signInWithPopup(provider)
-      ).pipe(map((userCredential) => this.mapCredentials(userCredential)));;
+  get token(): string {
+    return localStorage.getItem('token') || '';
   }
 
-  private mapCredentials(userCredential: firebase.auth.UserCredential): IUser {
+  private signInWithProvider(provider: any): Observable<User> {
+    return from(this.afAuth.signInWithPopup(provider)).pipe(
+      map((userCredential) => this.mapCredentials(userCredential))
+    );
+  }
+
+  private mapCredentials(userCredential: firebase.auth.UserCredential): User {
     if (userCredential.user) {
-      return {
-        uid: userCredential.user?.uid,
-        email: userCredential.user?.email || '',
-        displayName: userCredential.user?.displayName || '',
-        photoURL: userCredential.user?.photoURL || '',
-        emailVerified: userCredential.user?.emailVerified,
-      };
+      return new User(
+        userCredential.user.uid,
+        userCredential.user.email || undefined,
+        userCredential.user.displayName || undefined,
+        userCredential.user.photoURL || undefined,
+        userCredential.user.emailVerified
+      );
     }
     throw new Error('UserCredential is null');
   }
