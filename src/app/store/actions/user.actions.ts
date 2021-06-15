@@ -8,7 +8,7 @@ const AUTHENTICATED = createAction(
 );
 const NOT_AUTHENTICATED = createAction(
   '[Auth] Not Authenticated',
-  props<{ user: User }>()
+  props<{ user: User | null }>()
 );
 const CRED_LOGIN = createAction(
   '[Auth] Credential login attempt',

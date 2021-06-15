@@ -28,13 +28,11 @@
   </mat-toolbar>
   <mat-sidenav-container fxFlexFill>
     <mat-sidenav #sidenav>
-      <ng-container *ngIf="user.uid !== ''">
         <nav fxLayout="column">
           <a href="#" mat-button>Item 1</a>
           <a href="#" mat-button>Item 2</a>
           <a href="#" mat-button>Item 3</a>
         </nav>
-      </ng-container>
     </mat-sidenav>
     <mat-sidenav-content>
       <ng-content></ng-content>

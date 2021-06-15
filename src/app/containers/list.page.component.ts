@@ -30,6 +30,7 @@ export class ListPageComponent {
   }
 
   add(newTodo: Todo): void {
+    console.log('[ListPageComponent] add');
     this.store.dispatch(TodoActions.ADD({ todo: newTodo }));
   }
 

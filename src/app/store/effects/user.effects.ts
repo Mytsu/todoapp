@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import {
+  Actions,
+  createEffect,
+  ofType,
+} from '@ngrx/effects';
+import { EMPTY, of } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import * as UserActions from '../actions/user.actions';
-import { User } from '../../models/user.model';
 import { Credential } from '../../models/auth.model';
 
 @Injectable()
@@ -17,9 +19,7 @@ export class UserEffects {
       exhaustMap((cred: Credential) =>
         this.userService.signIn(cred).pipe(
           map((user) => UserActions.AUTHENTICATED({ user })),
-          catchError((error) =>
-            of(UserActions.AUTH_ERROR((new User().error = error)))
-          )
+          catchError((error) => of(UserActions.AUTH_ERROR(error)))
         )
       )
     )
@@ -31,9 +31,7 @@ export class UserEffects {
       exhaustMap(() =>
         this.userService.googleAuth().pipe(
           map((user) => UserActions.AUTHENTICATED({ user })),
-          catchError((error) =>
-            of(UserActions.AUTH_ERROR((new User().error = error)))
-          )
+          catchError((error) => of(UserActions.AUTH_ERROR(error)))
         )
       )
     )
@@ -45,19 +43,28 @@ export class UserEffects {
       exhaustMap(() =>
         this.userService.logout().pipe(
           map(() => UserActions.LOGOUT_CONFIRM()),
-          catchError((error) =>
-            of(UserActions.AUTH_ERROR((new User().error = error)))
-          )
+          catchError((error) => of(UserActions.AUTH_ERROR(error)))
         )
       )
     )
+  );
+
+  authError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserActions.AUTH_ERROR),
+        tap((state) => console.error('[Auth] UserState error: ' + state.error))
+      ),
+    { dispatch: false }
   );
 
   authenticated$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(UserActions.AUTHENTICATED),
-        tap(() => this.router.navigate(['/list']))
+        tap((state) => {
+          console.log('[UserEffect] authenticated, user: ' + state.user.uid);
+        }),
       ),
     { dispatch: false }
   );
@@ -65,6 +72,5 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private userService: UserService,
-    private router: Router
   ) {}
 }

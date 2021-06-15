@@ -3,9 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import { Observable, from } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { Credential } from '../models/auth.model';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,19 +13,25 @@ import { map } from 'rxjs/operators';
 export class UserService {
   constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  signIn(auth: Credential): Observable<User> {
+  signIn(cred: Credential): Observable<User> {
     return from(
-      this.afAuth.signInWithEmailAndPassword(auth.email, auth.password)
+      this.afAuth
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() =>
+          this.afAuth.signInWithEmailAndPassword(cred.email, cred.password)
+        )
     ).pipe(map((userCredential) => this.mapCredentials(userCredential)));
   }
 
-  signUp(auth: Credential): Observable<User> {
-    const cred = from(
-      this.afAuth.createUserWithEmailAndPassword(auth.email, auth.password)
-    );
-    return cred.pipe(
-      map((userCredential) => this.mapCredentials(userCredential))
-    );
+  signUp(cred: Credential): Observable<User> {
+    const cred$ = from(
+      this.afAuth
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() =>
+          this.afAuth.createUserWithEmailAndPassword(cred.email, cred.password)
+        )
+    ).pipe(map((userCredential) => this.mapCredentials(userCredential)));
+    return cred$;
   }
 
   sendVerificationEmail(): void {
@@ -51,23 +57,42 @@ export class UserService {
     return from(this.afAuth.signOut());
   }
 
-  get token(): string {
-    return localStorage.getItem('token') || '';
+  get user(): Observable<User> {
+    return from(
+      this.afAuth.authState.pipe(
+        first(),
+        map(
+          (user) =>
+            user ?
+            new User(
+              user.uid,
+              user.email ? user.email : '',
+              user.displayName ? user.displayName : '',
+              user.photoURL ? user.photoURL : '',
+              user.emailVerified
+            ) : new User()
+        )
+      )
+    );
   }
 
-  private signInWithProvider(provider: any): Observable<User> {
-    return from(this.afAuth.signInWithPopup(provider)).pipe(
-      map((userCredential) => this.mapCredentials(userCredential))
-    );
+  private signInWithProvider(
+    provider: firebase.auth.AuthProvider
+  ): Observable<User> {
+    return from(
+      this.afAuth
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => this.afAuth.signInWithPopup(provider))
+    ).pipe(map((userCredential) => this.mapCredentials(userCredential)));
   }
 
   private mapCredentials(userCredential: firebase.auth.UserCredential): User {
     if (userCredential.user) {
       return new User(
         userCredential.user.uid,
-        userCredential.user.email || undefined,
-        userCredential.user.displayName || undefined,
-        userCredential.user.photoURL || undefined,
+        userCredential.user.email || '',
+        userCredential.user.displayName || '',
+        userCredential.user.photoURL || '',
         userCredential.user.emailVerified
       );
     }

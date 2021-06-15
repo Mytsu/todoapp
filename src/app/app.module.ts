@@ -19,7 +19,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer as todoReducer } from './store/reducers/todo.reducer';
 import { reducer as userReducer } from './store/reducers/user.reducer';
 import { UserEffects } from './store/effects/user.effects';
+import { TodoEffects } from './store/effects/todo.effects';
 import { AppRoutingModule } from './app.routing.module';
+import { UserService } from './services/user.service';
+import { TodoService } from './services/todo.service';
 import { AppComponent } from './app.component';
 import { ListPageComponent } from './containers/list.page.component';
 import { UserPageComponent } from './containers/user.page.component';
@@ -29,9 +32,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NewComponent } from './components/new/new.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HomeComponent } from './components/home/home.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { environment } from './../environments/environment';
-import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { UserService } from './services/user.service';
     NewComponent,
     NavbarComponent,
     SignUpComponent,
+    HomeComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -67,9 +71,9 @@ import { UserService } from './services/user.service';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
-    EffectsModule.forRoot([ UserEffects ]),
+    EffectsModule.forRoot([UserEffects, TodoEffects]),
   ],
-  providers: [UserService],
+  providers: [UserService, TodoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

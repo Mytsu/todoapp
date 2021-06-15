@@ -38,6 +38,21 @@ a, a:visited {
   text-decoration: none;
 }
 
+.user-profile {
+  display: flex;
+  place-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 3rem;
+  width: 5rem;
+}
+
 .user-profile > img {
   border-radius: 50%;
+  height: 2.3rem;
+  width: auto;
+}
+
+.user-profile > img:hover {
+  border: 4px solid rgba(255, 255, 255, 0.3);
 }

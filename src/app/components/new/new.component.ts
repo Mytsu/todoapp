@@ -24,7 +24,7 @@ export class NewComponent implements OnInit {
 
   newTodo(): void {
     const todo = {
-      id: uuidv4(),
+      id: '',
       content: this.entrada.nativeElement.value,
       done: false
     };

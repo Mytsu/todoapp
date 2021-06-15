@@ -4,18 +4,24 @@ export interface IUser {
   displayName: string;
   photoURL: string;
   emailVerified: boolean;
-  loading?: boolean;
-  error?: string;
+  loading: boolean;
+  error: any;
+}
+
+export interface UserState {
+  user: User | null;
+  loading: boolean;
+  error: any | null;
 }
 
 export class User implements IUser {
-  loading?: boolean;
-  error?: string;
   constructor(
     public uid: string = '',
     public email: string = '',
     public displayName: string = 'GUEST',
     public photoURL: string = '',
     public emailVerified: boolean = false,
+    public loading: boolean = false,
+    public error: any = null
   ) {}
 }

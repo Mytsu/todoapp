@@ -42,7 +42,8 @@
           {
             "code": 80
           }
-        ]
+        ],
+        "no-underscore-dangle": "off"
       }
     },
     {

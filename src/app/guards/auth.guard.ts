@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     return this.store.select(userState => {
-      if (userState.user.uid !== undefined && userState.user.uid !== '') {
+      if (userState.user.uid) {
         return true;
       }
       else {

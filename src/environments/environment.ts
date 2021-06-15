@@ -12,6 +12,7 @@ export const environment = {
     messagingSenderId: '666101104243',
     appId: '1:666101104243:web:3b16c3c55427ebcca2f406',
   },
+  localStorageKey: 'Mytsu.todoapp',
 };
 
 /*
