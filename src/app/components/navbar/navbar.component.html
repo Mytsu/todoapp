@@ -13,7 +13,7 @@
     <ng-container *ngIf="user.uid !== ''; else navloginTemplate">
       <nav fxShow="true" fxHide.lt-md="true">
         <a [routerLink]="['/list']" mat-button>Todos</a>
-        <a [routerLink]="['/logout']" mat-button>Logout</a>
+        <a href="#" (click)="logout()" mat-button>Logout</a>
       </nav>
       <div class="user-profile">
         <img [src]="user.photoURL" />
@@ -29,7 +29,7 @@
     <mat-sidenav #sidenav>
       <nav fxLayout="column">
         <a [routerLink]="['/list']" mat-button>Todos</a>
-        <a [routerLink]="['/logout']" mat-button>Logout</a>
+        <a href="#" (click)="logout()" mat-button>Logout</a>
       </nav>
     </mat-sidenav>
     <mat-sidenav-content>
