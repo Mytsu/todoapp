@@ -36,9 +36,8 @@ export class TodoService {
   }
 
   add(todo: Todo): void {
-    delete todo.id;
     this.todoCollection
-      .add(todo)
+      .add({ content: todo.content, done: todo.done })
       .then(
         (confirmed) => console.log(confirmed),
         (rejected) => console.log(rejected)
