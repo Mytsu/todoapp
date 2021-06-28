@@ -13,7 +13,7 @@ import { User } from './models/user.model';
 @Component({
   selector: 'app-root',
   template: `
-    <app-navbar (userLogoutEvent)="logout()" )>
+    <app-navbar (userLogoutEvent)="logout()">
       <router-outlet></router-outlet>
     </app-navbar>
   `,
