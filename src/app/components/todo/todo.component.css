@@ -34,3 +34,11 @@
   text-transform: uppercase;
   padding: 5px 10px 5px 10px;
 }
+
+mat-icon {
+  justify-self: center;
+  align-self: center;
+  margin-right: 1em;
+  cursor: pointer;
+  opacity: .6;
+}
