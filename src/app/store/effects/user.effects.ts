@@ -4,7 +4,7 @@ import {
   createEffect,
   ofType,
 } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import * as UserActions from '../actions/user.actions';
@@ -62,9 +62,9 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(UserActions.AUTHENTICATED),
-        tap((state) => {
+        /* tap((state) => {
           console.log('[UserEffect] authenticated, user: ' + state.user.uid);
-        }),
+        }), */
       ),
     { dispatch: false }
   );

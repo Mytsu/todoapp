@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, exhaustMap, catchError, tap, switchMap } from 'rxjs/operators';
+import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { TodoService } from '../../services/todo.service';
 import * as TodoActions from '../actions/todo.actions';
 import { Todo } from '../../models/todo.model';
-import { UserService } from 'src/app/services/user.service';
 
 @Injectable()
 export class TodoEffects {
@@ -60,19 +59,18 @@ export class TodoEffects {
   opSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.OPERATION_SUCCESS),
-      tap((state) => console.log(`[Todo] ${state.msg}`))
+      /* tap((state) => console.log(`[Todo] ${state.msg}`)) */
     )
   );
 
   opFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.OPERATION_FAILURE),
-      tap((state) => console.log(`[Todo] ${state.msg}\n${state.error}`))
+      /* tap((state) => console.log(`[Todo] ${state.msg}\n${state.error}`)) */
     )
   );
 
   constructor(
     private actions$: Actions,
-    private todoService: TodoService,
-    private userService: UserService) {}
+    private todoService: TodoService) {}
 }
