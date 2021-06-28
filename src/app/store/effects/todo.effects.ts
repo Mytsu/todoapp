@@ -57,15 +57,6 @@ export class TodoEffects {
     { dispatch: false }
   );
 
-  refresh$ = this.userService.user.pipe(
-    switchMap((user) => user ?
-      this.todoService.collectionRef.valueChanges().pipe(
-        map((todos: Todo[]) => TodoActions.REFRESH({ todos }))
-      ) :
-      of(TodoActions.REFRESH({ todos: [] }))
-    )
-  );
-
   opSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.OPERATION_SUCCESS),

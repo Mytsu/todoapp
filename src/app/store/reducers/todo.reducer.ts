@@ -6,19 +6,13 @@ export const initialState: Todo[] = [];
 
 const todoReducer = createReducer(
   initialState,
-  on(TodoActions.ADD, (state: Todo[], props: { todo: Todo }) => {
-    console.log('[TodoReducer] add');
-    return [...state];
-  }),
+  on(TodoActions.ADD, (state: Todo[], props: { todo: Todo }) => [...state]),
   on(TodoActions.UPDATE, (state: Todo[], props: { todo: Todo }) => [...state]),
   on(TodoActions.REMOVE, (state: Todo[], props: { id: string }) => [...state]),
   on(TodoActions.DB_LOAD_INIT, (state: Todo[]) => state.slice()),
   on(TodoActions.DB_LOAD, (state: Todo[], props: { todos: Todo[] }) =>
-    state.concat(props.todos)
+    props.todos
   ),
-  on(TodoActions.REFRESH, (state: Todo[], props: { todos: Todo[] }) => [
-    ...props.todos
-  ]),
   on(TodoActions.OPERATION_SUCCESS, (state: Todo[]) => state.slice()),
   on(TodoActions.OPERATION_FAILURE, (state: Todo[], props: { error: any }) =>
     state.slice()

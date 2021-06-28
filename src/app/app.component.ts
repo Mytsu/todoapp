@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import * as UserActions from './store/actions/user.actions';
+import { AUTHENTICATED, NOT_AUTHENTICATED } from './store/actions/user.actions';
+import { DB_LOAD_INIT } from './store/actions/todo.actions';
 import { UserService } from './services/user.service';
 import { User } from './models/user.model';
 
@@ -27,10 +28,13 @@ export class AppComponent implements OnInit {
   private loadUser(): void {
     this.userService.user
       .pipe(take(1))
-      .subscribe((lsUser) =>
-        lsUser.uid !== undefined && lsUser.uid !== ''
-          ? this.store.dispatch(UserActions.AUTHENTICATED({ user: lsUser }))
-          : this.store.dispatch(UserActions.NOT_AUTHENTICATED({ user: null }))
-      );
+      .subscribe((lsUser) => {
+        if(lsUser.uid !== undefined && lsUser.uid !== '') {
+          this.store.dispatch(AUTHENTICATED({ user: lsUser }));
+          this.store.dispatch(DB_LOAD_INIT());
+        } else {
+          this.store.dispatch(NOT_AUTHENTICATED({ user: null }));
+        }
+      });
   }
 }

@@ -5,7 +5,7 @@ import {
 } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Todo } from '../models/todo.model';
 import { User } from '../models/user.model';
 
@@ -21,18 +21,22 @@ export class TodoService {
   ) {}
 
   loadTodos(): Observable<Todo[]> {
-    return this.todoCollection.get().pipe(
-      take(1),
+    return this.todoCollection.snapshotChanges().pipe(
       map((query) => {
         const todos: Todo[] = [];
-        query.forEach((querySnapshot) => todos.push(querySnapshot.data()));
+        query.forEach((querySnapshot) =>
+          todos.push({
+            id: querySnapshot.payload.doc.id,
+            ...querySnapshot.payload.doc.data(),
+          })
+        );
         return todos;
       })
     );
   }
 
   add(todo: Todo): void {
-    console.log('[TodoService] add');
+    delete todo.id;
     this.todoCollection
       .add(todo)
       .then(
@@ -43,11 +47,13 @@ export class TodoService {
   }
 
   update(todo: Todo): void {
-    this.afs.doc<Todo>(`${this.todoCollection}/${todo.id}`).update(todo);
+    this.todoCollection
+      .doc(todo.id)
+      .update({ content: todo.content, done: todo.done });
   }
 
   delete(id: string): void {
-    this.afs.doc<Todo>(`${this.todoCollection}/${id}`).delete();
+    this.todoCollection.doc(id).delete();
   }
 
   get collectionRef(): AngularFirestoreCollection<Todo> {

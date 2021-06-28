@@ -25,11 +25,6 @@ export const DB_LOAD = createAction(
   props<{ todos: Todo[] }>()
 );
 
-export const REFRESH = createAction(
-  '[Todo] Refresh Store',
-  props<{ todos: Todo[] }>()
-);
-
 export const OPERATION_SUCCESS = createAction(
   '[Todo] Operation Successful',
   props<{ msg: string }>()
