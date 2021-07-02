@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { Todo } from '../models/todo.model';
 import { User, UserState } from '../models/user.model';
@@ -23,16 +23,18 @@ export class TodoService {
     this.user$ = this.store.select((state) => state.user.user);
   }
 
-  add(todo: Todo): void {
-    this.collectionRef.pipe(
-      map((todoCollection) =>
-        todoCollection.add({ content: todo.content, done: todo.done })
-      ),
+  add(todo: Todo): Observable<string> {
+    return from(this.collectionRef.pipe(
+      mergeMap((todoCollection) => todoCollection.add({
+          content: todo.content,
+          done: todo.done,
+        }).then(docRef => docRef.id)
+      ))
     );
   }
 
   update(todo: Todo): Observable<void> {
-    if(!environment.production) {
+    if (!environment.production) {
       console.log(`[TodoService] update: ${todo.id}`);
     }
     return this.collectionRef.pipe(
@@ -53,10 +55,7 @@ export class TodoService {
 
   get collectionRef(): Observable<AngularFirestoreCollection<Todo>> {
     return this.user$.pipe(
-      map((user) =>
-        this.afs
-          .collection<Todo>(`users/${user?.uid}/todos`)
-      )
+      map((user) => this.afs.collection<Todo>(`users/${user?.uid}/todos`))
     );
   }
 
