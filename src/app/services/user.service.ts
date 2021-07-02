@@ -58,21 +58,21 @@ export class UserService {
   }
 
   get user(): Observable<User> {
-    return from(
-      this.afAuth.authState.pipe(
-        first(),
-        map(
-          (user) =>
-            user ?
-            new User(
-              user.uid,
-              user.email ? user.email : '',
-              user.displayName ? user.displayName : '',
-              user.photoURL ? user.photoURL : '',
-              user.emailVerified
-            ) : new User()
-        )
-      )
+    return this.afAuth.authState.pipe(
+      first(),
+      map((user) => {
+        if (!user) {
+          return new User();
+        } else {
+          return new User(
+            user.uid,
+            user.email ? user.email : '',
+            user.displayName ? user.displayName : '',
+            user.photoURL ? user.photoURL : '',
+            user.emailVerified
+          );
+        }
+      })
     );
   }
 

@@ -8,7 +8,9 @@ import { of } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import * as UserActions from '../actions/user.actions';
+import { DB_LOAD_INIT } from '../actions/todo.actions';
 import { Credential } from '../../models/auth.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class UserEffects {
@@ -53,7 +55,11 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(UserActions.AUTH_ERROR),
-        tap((state) => console.error('[Auth] UserState error: ' + state.error))
+        tap((state) => {
+          if (!environment.production) {
+            console.error('[Auth] UserState error: ' + state.error);
+          }
+        })
       ),
     { dispatch: false }
   );
@@ -61,12 +67,8 @@ export class UserEffects {
   authenticated$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(UserActions.AUTHENTICATED),
-        /* tap((state) => {
-          console.log('[UserEffect] authenticated, user: ' + state.user.uid);
-        }), */
-      ),
-    { dispatch: false }
+        ofType(UserActions.AUTHENTICATED)
+      ), ({ dispatch: false })
   );
 
   constructor(

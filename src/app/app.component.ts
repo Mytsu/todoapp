@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
 import {
   AUTHENTICATED,
   LOGOUT,
@@ -34,8 +33,8 @@ export class AppComponent implements OnInit {
   }
 
   private loadUser(): void {
-    this.userService.user.pipe(take(1)).subscribe((lsUser) => {
-      if (lsUser.uid !== undefined && lsUser.uid !== '') {
+    this.userService.user.subscribe((lsUser) => {
+      if (lsUser.uid) {
         this.store.dispatch(AUTHENTICATED({ user: lsUser }));
         this.store.dispatch(DB_LOAD_INIT());
       } else {

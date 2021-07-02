@@ -6,6 +6,7 @@ export interface IUser {
   emailVerified: boolean;
   loading: boolean;
   error: any;
+  todos?: string[];
 }
 
 export interface UserState {
@@ -22,6 +23,7 @@ export class User implements IUser {
     public photoURL: string = '',
     public emailVerified: boolean = false,
     public loading: boolean = false,
-    public error: any = null
+    public error: any = null,
+    public todos: string[] = []
   ) {}
 }
