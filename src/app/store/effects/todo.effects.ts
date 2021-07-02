@@ -32,7 +32,7 @@ export class TodoEffects {
     () =>
       this.actions$.pipe(
         ofType(TodoActions.ADD),
-        tap((state) => this.todoService.add(state.todo))
+        tap((state) => this.todoService.add(state.todo).subscribe())
       ),
     { dispatch: false }
   );
@@ -41,7 +41,7 @@ export class TodoEffects {
     () =>
       this.actions$.pipe(
         ofType(TodoActions.UPDATE),
-        tap((state) => this.todoService.update(state.todo))
+        tap((state) => this.todoService.update(state.todo).subscribe())
       ),
     { dispatch: false }
   );
@@ -50,7 +50,7 @@ export class TodoEffects {
     () =>
       this.actions$.pipe(
         ofType(TodoActions.REMOVE),
-        tap((state) => this.todoService.delete(state.id))
+        tap((state) => this.todoService.delete(state.id).subscribe())
       ),
     { dispatch: false }
   );
