@@ -32,16 +32,17 @@ export class UserPageComponent implements OnInit {
     }
   }
 
+  navigate(url: string) {
+    this.router.navigate([url]);
+  }
+
   googleSignInEvent() {
-    // dispatch provider signin event
-    console.log('[googleSignInEvent] emit');
     this.store.dispatch(UserActions.GOOGLE_LOGIN());
+    this.navigate('');
   }
 
   formSubmitEvent($event: Credential) {
-    // dispatch login/signup event
-    console.log('[formSubmitEvent] emit');
-    console.log($event);
     this.store.dispatch(UserActions.CRED_LOGIN({ credential: $event }));
+    this.navigate('');
   }
 }
