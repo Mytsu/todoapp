@@ -1,3 +1,9 @@
-<article>
-  HomeComponent
-</article>
+<mat-card>
+  <article>
+    TodoApp made with Angular 12, NGRX and Firebase. Below is the list of features/bugs not dealt with yet.
+    <app-todo
+      *ngFor="let todo of todos"
+      [todo]="todo"
+      [options]="{checkbox: false, delete: false}"></app-todo>
+  </article>
+</mat-card>

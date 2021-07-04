@@ -1,5 +1,21 @@
+:host {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+mat-card {
+  width: fit-content;
+  height: fit-content;
+  margin-top: 2em;
+  align-self: center;
+  justify-self: center;
+  padding: 2em;
+}
+
 article {
   display: flex;
+  flex-direction: column;
   place-content: center;
   align-items: center;
   height: 100%;
