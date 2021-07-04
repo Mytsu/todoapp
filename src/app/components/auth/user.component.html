@@ -13,6 +13,7 @@
           name="password"
           [(ngModel)]="password"
         />
+        <mat-error *ngIf="error">{{error}}</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">
         {{ texts.formButton }}

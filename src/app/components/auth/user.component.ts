@@ -16,19 +16,20 @@ export class UserComponent implements OnInit {
   email = '';
   password = '';
   texts!: { formButton: string; googleButton: string };
+  error: string | null = null;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     if (this.type === 'login') {
       this.texts = {
         formButton: 'Login',
-        googleButton: 'Sign In with Google'
+        googleButton: 'Sign In with Google',
       };
-    } else /* if (this.type === 'signUp') **/ {
+    } /* if (this.type === 'signUp') **/ else {
       this.texts = {
         formButton: 'Sign Up',
-        googleButton: 'Sign Up with Google'
+        googleButton: 'Sign Up with Google',
       };
     }
   }
