@@ -31,7 +31,6 @@ import { UserComponent } from './components/auth/user.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NewComponent } from './components/new/new.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import { environment } from './../environments/environment';
@@ -47,7 +46,6 @@ import { environment } from './../environments/environment';
     NotFoundComponent,
     NewComponent,
     NavbarComponent,
-    SignUpComponent,
     HomeComponent,
   ],
   imports: [

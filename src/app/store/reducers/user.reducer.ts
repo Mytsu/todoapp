@@ -1,4 +1,4 @@
-import { Action, createReducer, on, INIT } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { User, UserState } from '../../models/user.model';
 import { Credential } from '../../models/auth.model';
 import * as userActions from '../actions/user.actions';
@@ -9,7 +9,7 @@ const defaultState: UserState = {
   error: null,
 };
 
-const authReducer = createReducer(
+const userReducer = createReducer(
   defaultState,
   on(userActions.AUTHENTICATED, (state: UserState, props: { user: User }) => ({
     user: props.user,
@@ -52,4 +52,4 @@ const authReducer = createReducer(
 );
 
 export const reducer = (state: UserState | undefined, action: Action) =>
-  authReducer(state, action);
+  userReducer(state, action);
