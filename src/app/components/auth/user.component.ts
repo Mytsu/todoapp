@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
     if (this.type === 'login') {
       this.texts = {
         formButton: 'Login',
-        googleButton: 'Sign In with Google',
+        googleButton: 'Log In with Google',
       };
     } /* if (this.type === 'signUp') **/ else {
       this.texts = {
