@@ -8,7 +8,6 @@ import { of } from 'rxjs';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import * as UserActions from '../actions/user.actions';
-import { DB_LOAD_INIT } from '../actions/todo.actions';
 import { Credential } from '../../models/auth.model';
 import { environment } from '../../../environments/environment';
 
@@ -23,7 +22,7 @@ export class UserEffects {
           map((user) => UserActions.AUTHENTICATED({ user })),
           catchError((error) => of(UserActions.AUTH_ERROR(error)))
         )
-      )
+      ),
     )
   );
 
@@ -67,7 +66,7 @@ export class UserEffects {
   authenticated$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(UserActions.AUTHENTICATED)
+        ofType(UserActions.AUTHENTICATED),
       ), ({ dispatch: false })
   );
 
