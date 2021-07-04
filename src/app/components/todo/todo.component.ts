@@ -8,6 +8,10 @@ import { Todo } from './../../models/todo.model';
 })
 export class TodoComponent {
   @Input() todo!: Todo;
+  @Input() options = {
+    checkbox: true,
+    delete: true
+  };
   @Output() toggleUpdateEvent = new EventEmitter<Todo>();
   @Output() removeEvent = new EventEmitter<string>();
 

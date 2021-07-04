@@ -4,7 +4,8 @@
     type="checkbox"
     (click)="update()"
     [checked]="todo.done"
+    [disabled]="!options.checkbox"
   >
   <span class="content">{{ todo.content }}</span>
-  <mat-icon (click)="remove()">delete_outline</mat-icon>
+  <mat-icon (click)="remove()" *ngIf="options.delete">delete_outline</mat-icon>
 </div>
