@@ -8,7 +8,9 @@
     >
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <span class="logo"><a [routerLink]="['/']">Logo</a></span>
+    <span class="logo">
+      <a [routerLink]="['/']">TodoApp</a>
+    </span>
     <span class="spacer"></span>
     <ng-container *ngIf="user.uid !== ''; else navloginTemplate">
       <nav fxShow="true" fxHide.lt-md="true">
