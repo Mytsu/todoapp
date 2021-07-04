@@ -21,7 +21,7 @@ import { User } from './models/user.model';
 export class AppComponent implements OnInit {
   constructor(
     private userService: UserService,
-    private store: Store<{ user: User }>
+    private store: Store<{ user: User }>,
   ) {}
 
   ngOnInit(): void {
